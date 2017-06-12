@@ -1,6 +1,6 @@
 {
-  "name": "bunyan-debug-stream",
-  "version": "1.0.8",
+  "name": "slrun-bunyan-stream",
+  "version": "0.1.0",
   "author": "Jason Walton <dev@lucid.thedreaming.org> (https://github.com/jwalton)",
   "keywords": [
     "bunyan",
@@ -13,11 +13,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/benbria/bunyan-debug-stream.git"
+    "url": "https://github.com/slrunteam/slrun-bunyan-stream.git"
   },
   "dependencies": {
     "colors": "^1.0.3",
-    "exception-formatter": "^1.0.4"
+    "exception-formatter": "^1.0.4",
+    "indent-string": "^3.1.0"
   },
   "devDependencies": {
     "chai": "^1.10.0",
@@ -33,7 +34,8 @@
   },
   "main": "./lib/BunyanDebugStream.js",
   "scripts": {
-    "prepublish": "coffee -c -o lib src",
+    "build": "coffee -c -o lib src",
+    "prepublish": "npm run build",
     "test": "mocha && istanbul report text-summary lcov"
   },
   "engines": {

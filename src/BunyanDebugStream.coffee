@@ -4,6 +4,7 @@ path               = require 'path'
 bunyan             = require 'bunyan'
 colors             = require 'colors/safe'
 exceptionFormatter = require 'exception-formatter'
+indentString       = require 'indent-string'
 
 {srcToString, applyColors, dateToString, isString} = require './utils'
 
@@ -196,18 +197,17 @@ class BunyanDebugStream extends Writable
                 consumed[key] = true
 
         # Use JSON.stringify on whatever is left
+        firstKey = true
         for key, value of entry
             # Skip fields we don't care about
             if consumed[key] then continue
+            if value == null then continue
 
-            valueString = JSON.stringify value
-            if valueString?
-                # Make sure value isn't too long.
-                cols = process.stdout.columns
-                start = "#{@_indent}#{key}: "
-                if cols and (valueString.length + start.length) >= cols
-                    valueString = valueString[0...(cols - 3 - start.length)] + "..."
-                values.push "#{start}#{valueString}"
+            if firstKey then firstKey = false
+            else values.push(indentString("--", @_indent.length))
+
+            valueString = indentString("#{key}: #{JSON.stringify(value, null, 2)}", @_indent.length)
+            values.push valueString
 
         prefixes = if prefixes.length > 0 then "[#{prefixes.join(',')}] " else ''
 

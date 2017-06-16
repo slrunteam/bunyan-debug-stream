@@ -5,6 +5,7 @@ bunyan             = require 'bunyan'
 colors             = require 'colors/safe'
 exceptionFormatter = require 'exception-formatter'
 indentString       = require 'indent-string'
+jsonStringify      = require 'json-stringify-pretty-compact'
 
 {srcToString, applyColors, dateToString, isString} = require './utils'
 
@@ -197,16 +198,12 @@ class BunyanDebugStream extends Writable
                 consumed[key] = true
 
         # Use JSON.stringify on whatever is left
-        firstKey = true
         for key, value of entry
             # Skip fields we don't care about
             if consumed[key] then continue
             if value == null then continue
 
-            if firstKey then firstKey = false
-            else values.push(indentString("--", @_indent.length))
-
-            valueString = indentString("#{key}: #{JSON.stringify(value, null, 2)}", @_indent.length)
+            valueString = indentString("#{key}: #{jsonStringify(value)}", @_indent.length)
             values.push valueString
 
         prefixes = if prefixes.length > 0 then "[#{prefixes.join(',')}] " else ''

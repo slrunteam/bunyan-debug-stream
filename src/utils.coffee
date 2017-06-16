@@ -41,25 +41,7 @@ toShortFilename = exports.toShortFilename = (filename, basepath=null, replacemen
     if basepath?
         if exports.isString(basepath) and !endsWith(basepath, path.sep) then basepath += path.sep
         filename = filename.replace basepath, replacement
-
-    parts = filename.split path.sep
-
-    file  = parts[parts.length - 1]
-    ext   = path.extname file
-    file  = path.basename file, ext
-
-    if file is 'index'
-        shortenIndex = parts.length - 3
-        file = ''
-    else
-        shortenIndex = parts.length - 2
-
-    # Strip the extension
-    parts[parts.length - 1] = file
-    for part, index in parts
-        if index <= shortenIndex then parts[index] = parts[index][0]
-
-    return parts.join '/'
+    return filename
 
 # Transforms a bunyan `src` object (a `{file, line, func}` object) into a human readable string.
 exports.srcToString = (src, basepath=null, replacement="./") ->

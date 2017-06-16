@@ -1,4 +1,4 @@
-Output stream for Bunyan which prints human readable logs.
+Output stream for Bunyan which prints human readable logs. This repo is a fork of [benbria/bunyan-debug-stream](https://github.com/benbria/bunyan-debug-stream).
 
 [![NPM](https://nodei.co/npm/bunyan-debug-stream.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/bunyan-debug-stream/)
 
@@ -11,7 +11,7 @@ Bunyan logs and outputs human readable log lines (which look sort of vaguely lik
 There are plenty of other npm packages out there that do something similar, but this is the best
 one. ;)
 
-![](https://github.com/benbria/bunyan-debug-stream/blob/master/docs/sample.png)
+![](https://github.com/benbria/bunyan-debug-stream/raw/master/docs/sample.png)
 
 Features
 ========

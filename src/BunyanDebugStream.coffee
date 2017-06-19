@@ -203,7 +203,7 @@ class BunyanDebugStream extends Writable
             if consumed[key] then continue
             if value == null then continue
 
-            valueString = indentString("#{key}: #{jsonStringify(value)}", @_indent.length)
+            valueString = indentString("#{key}: #{jsonStringify(value, { maxLength: 120 })}", @_indent.length)
             values.push valueString
 
         prefixes = if prefixes.length > 0 then "[#{prefixes.join(',')}] " else ''
